@@ -4,9 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EduBot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #f0f8ff;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    textarea {
+      width: 80%;
+      height: 100px;
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #answer {
+      margin-top: 20px;
+      padding: 15px;
+      background: #ecf0f1;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 80%;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to EduBot</h1>
-  <p>Ask me any question and I will help you learn!</p>
+  <h1>Welcome to EduBot 🎓</h1>
+  <p>Ask me any question:</p>
+  <textarea id="question"></textarea><br>
+  <button onclick="askEduBot()">Ask</button>
+  <div id="answer"></div>
+
+  <script>
+    async function askEduBot() {
+      const question = document.getElementById("question").value;
+      const response = await fetch("/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+      });
+      const data = await response.json();
+      document.getElementById("answer").innerText = data.answer;
+    }
+  </script>
 </body>
 </html>
+
