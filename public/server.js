@@ -33,7 +33,9 @@ app.post("/ask", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+// 🚀 IMPORTANT: Railway gives you PORT automatically
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`🚀 EduBot running at http://localhost:${PORT}`);
+  console.log(`🚀 EduBot running on port ${PORT}`);
 });
+
